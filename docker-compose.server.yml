@@ -1,0 +1,16 @@
+## docker-compose.server.yml
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    ports:
+      - "8080:3000"
+    env_file :
+      - .env
+    restart : always
+  backend :
+    image : ${BACKEND_IMAGE}
+    ports :
+      - "4040:5000"
+    env_file :
+      - .env
+    restart : always

@@ -1,0 +1,6 @@
+FROM node:latest
+COPY ./backend /opt/app
+RUN cd /opt/app \
+  && npm install --prod 
+WORKDIR /opt/app
+CMD ["npm", "run", "start"]
