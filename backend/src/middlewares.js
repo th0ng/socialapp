@@ -1,21 +1,41 @@
-function notFound(req, res, next) {
-  res.status(404);
-  const error = new Error(`🔍 - Not Found - ${req.originalUrl}`);
-  next(error);
-}
+/* eslint-disable consistent-return */
+/* eslint-disable no-else-return */
+const logger = require('./utils/logger');
 
-/* eslint-disable no-unused-vars */
-function errorHandler(err, req, res, next) {
-  /* eslint-enable no-unused-vars */
-  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
-  res.status(statusCode);
-  res.json({
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
-  });
-}
+const requestLogger = (request, response, next) => {
+  logger.info('Method:', request.method);
+  logger.info('Path:  ', request.path);
+  logger.info('Body:  ', request.body);
+  logger.info('---');
+  next();
+};
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' });
+};
+
+const errorHandler = (error, request, response, next) => {
+  if (error.name === 'CastError') {
+    return response.status(400).send({
+      error: 'malformatted id',
+    });
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({
+      error: error.message,
+    });
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token',
+    });
+  }
+
+  logger.error(error.message);
+
+  next(error);
+};
 
 module.exports = {
-  notFound,
+  requestLogger,
+  unknownEndpoint,
   errorHandler,
 };

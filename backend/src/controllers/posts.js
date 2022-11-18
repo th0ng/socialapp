@@ -9,13 +9,13 @@ const User = require('../models/user');
 const getTokenFrom = (request) => {
   const authorization = request.get('authorization');
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+    return authorization.substring(7);
   }
   return null;
 };
 
 postsRouter.get('/', async (req, res) => {
-  const posts = await Post.find({}).populate('user', { username: 1});
+  const posts = await Post.find({}).populate('user', { username: 1 });
   res.json(posts);
 });
 
@@ -25,12 +25,13 @@ postsRouter.get('/:id', (req, res, next) => {
         if (post) {
           res.json(post);
         } else {
-          res.status(404).end()
+          res.status(404).end();
         }
       }).catch((err) => next(err));
 });
 
 postsRouter.post('/', async (req, res) => {
+  // eslint-disable-next-line prefer-destructuring
   const body = req.body;
   const token = getTokenFrom(req);
   const decodedToken = jwt.verify(token, process.env.SECRET);
