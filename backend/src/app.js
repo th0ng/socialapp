@@ -14,8 +14,6 @@ const config = require("./utils/config");
 
 require("dotenv").config();
 
-const api = require("./api");
-
 const app = express();
 
 logger.info("connecting to", config.MONGODB_URI);
@@ -35,14 +33,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use(middlewares.requestLogger);
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
-  });
-});
-
-app.use("/api", api);
 
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
