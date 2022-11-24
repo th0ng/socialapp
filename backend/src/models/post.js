@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
   },
   date: Date,
   likes: Number,
-  comment: [
+  comments: [
     {
       type: String,
       maxlength: 150,

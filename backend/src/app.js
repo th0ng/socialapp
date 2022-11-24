@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const loginRouter = require("./controllers/login");
 const usersRouter = require("./controllers/users");
 const postsRouter = require("./controllers/posts");
 const middlewares = require("./middlewares");
@@ -34,6 +35,11 @@ app.use(express.json());
 
 app.use(middlewares.requestLogger);
 
+app.get('/', (req, res) => {
+  res.json({ Saying: 'wakawaka' });
+});
+
+app.use('/api/login', loginRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
 
