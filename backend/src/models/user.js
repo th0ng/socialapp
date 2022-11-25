@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   name: String,
   passwordHash: String,
-  birthday: Date,
+  birthday: String,
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
