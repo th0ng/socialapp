@@ -1,28 +1,61 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-globals */
 import React, {useState} from 'react';
-import { Box, FormGroup, FormControl,  TextField, RadioGroup, FormControlLabel, Radio, Typography, Button } from '@mui/material';
+import userService from '../services/users';
+import { Box, FormGroup, TextField, RadioGroup, FormControlLabel, Radio, Typography, Button } from '@mui/material';
+import { HiEye, HiEyeSlash } from "react-icons/hi2";
 
 const RegisterPage = () => {
-
-  const [fullname, setFullname] = useState("");
+  const [userList, setUserList] = useState([]);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState(null);
   const [gender, setGender] = useState("male");
 
+  const [shown, setShown] = useState(false);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    try {
+      const newUser = {
+        name,
+        email,
+        username,
+        password,
+        birthday,
+        gender
+      }
+      userService.getAll().then((users) => setUserList(users));
+      // eslint-disable-next-line array-callback-return
+      const sameUsernameCheck = userList.find((user) => {
+        user.username === newUser.username;
+      })
+      if (!sameUsernameCheck) {
+        userService.register(newUser);
+      }
+    } catch (err) {console.log(err)};
+  }
+
   return (
-    <Box sx={{width: 800,margin: 'auto',}}> 
+    <Box sx={{
+      width: 800,
+      margin: '50px auto', 
+      backgroundColor: '#E5D9B6',
+      backgroundOpacity: 0.3,
+      borderRadius: '10px',
+      padding: 5
+    }}> 
       <Typography variant='h2'>Register</Typography>
       <FormGroup>
-        <FormControl>
           <TextField color='success'label="Full Name"sx={{margin: '8px'}}
-          onChange={() => {setFullname(event.target.value)}}
+          onChange={() => {setName(event.target.value)}}
           />
           <TextField color='success'label="Email"sx={{margin: '8px',}} onChange={() => {setEmail(event.target.value)}}/>
           <TextField color='success'label="Username"sx={{margin: '8px',}} onChange={() => {setUsername(event.target.value)}}/>
-          <TextField color='success'label="Password"sx={{margin: '8px',}} onChange={() => {setPassword(event.target.value)}}/>
+          <TextField color='success'label="Password" type={!shown ? "password" : "text"} sx={{margin: '8px',}} onChange={() => {setPassword(event.target.value)}}/>
+          {!shown ? <HiEyeSlash onClick={() => setShown(!shown)} /> : <HiEyeSlash onClick={() => setShown(!shown)}/>}
           <TextField
             id="date"
             label="Birthday"
@@ -35,7 +68,7 @@ const RegisterPage = () => {
             sx={{
               margin: '8px',
             }}
-            onChange={() => {() => setBirthday(event.target.value)}}
+            onChange={() => {() => {setBirthday(event.target.value)}}}
           />
           <Typography align='left' sx={{ml: '8px',}}>Gender</Typography>
           <RadioGroup
@@ -52,11 +85,10 @@ const RegisterPage = () => {
             <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="other" control={<Radio />} label="Other" />
           </RadioGroup>
-        </FormControl>
+          <Button type="submit" variant="contained"color="success"sx={{width: '50%',padding: 1, margin: 'auto'}} onClick={handleRegister}>
+            Submit
+          </Button>
       </FormGroup>
-      <Button variant="contained"color="success"sx={{margin: '8px',width: '100%',padding: 1,}}>
-        Submit
-      </Button>
     </Box>
   )
 }

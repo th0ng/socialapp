@@ -16,6 +16,8 @@ const config = require("./utils/config");
 require("dotenv").config();
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
 logger.info("connecting to", config.MONGODB_URI);
 
@@ -30,8 +32,6 @@ mongoose
 
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
 
 app.use(middlewares.requestLogger);
 

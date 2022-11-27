@@ -4,8 +4,8 @@
   "description": "A basic starter for an express.js API",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node src/index.js --ignore client",
+    "dev": "nodemon src/index.js --ignore client",
     "lint": "eslint --fix src",
     "test": "jest"
   },
