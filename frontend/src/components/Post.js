@@ -1,8 +1,13 @@
-import React from 'react'
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React from 'react';
 
-const Post = () => {
+const Post = ({ user, post }) => {
   return (
-    <div>Post</div>
+    <Box>
+      <Typography>user.name</Typography>
+      <Typography>post.content</Typography>
+    </Box>
   )
 }
 
