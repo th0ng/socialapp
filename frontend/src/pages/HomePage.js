@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import postService from '../services/posts';
 import loginService from '../services/login';
 
-import Header from '../components/HeaderNonUser';
+import HeaderNonUser from '../components/HeaderNonUser';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -56,7 +56,7 @@ const HomePage = () => {
   };
   return (
     <div>
-      <Header />
+      <HeaderNonUser />
     </div>
   )
 }

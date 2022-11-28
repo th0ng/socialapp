@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 export default function HeaderNonUser() {
   return (
@@ -16,7 +17,7 @@ export default function HeaderNonUser() {
         Facebaki
       </Typography>
       <Button color="inherit" sx={{ paddingX: '10px'}}>
-        <Typography color="#F1D3B3">Login</Typography>
+        <Link to='/login'><Typography color='#F1D3B3'>Login</Typography></Link>
       </Button>
     </Box>
   );
