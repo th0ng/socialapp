@@ -1,21 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import postService from '../services/posts';
 import loginService from '../services/login';
 
-import HeaderNonUser from '../components/HeaderNonUser';
+import { HeaderNonUser, Header, Post } from '../components';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  
+
   const hook = () => {
     postService
-      .getAll().then((allNotes) => setPosts(allNotes));
+      .getAll().then((allPosts) => setPosts(allPosts));
   }
-  useEffect(hook, [posts])
-  
+  useEffect(hook, [])
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser");
     if (loggedUserJSON) {
@@ -56,7 +56,8 @@ const HomePage = () => {
   };
   return (
     <div>
-      <HeaderNonUser />
+      {!user ? <Header /> : <HeaderNonUser />}
+      {posts.map((post) => <Post />)}
     </div>
   )
 }
