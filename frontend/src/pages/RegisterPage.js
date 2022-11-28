@@ -35,7 +35,7 @@ const RegisterPage = () => {
       if (!sameUsernameCheck) {
         userService.register(newUser);
       }
-    } catch (err) {console.log(err)};
+    } catch (err) {console.log(err)}
   }
 
   return (
@@ -49,13 +49,13 @@ const RegisterPage = () => {
     }}> 
       <Typography variant='h2'>Register</Typography>
       <FormGroup>
-          <TextField color='success'label="Full Name"sx={{margin: '8px'}}
+          <TextField color='success' label="Full Name" sx={{margin: '8px'}}
           onChange={() => {setName(event.target.value)}}
           />
-          <TextField color='success'label="Email"sx={{margin: '8px',}} onChange={() => {setEmail(event.target.value)}}/>
-          <TextField color='success'label="Username"sx={{margin: '8px',}} onChange={() => {setUsername(event.target.value)}}/>
-          <TextField color='success'label="Password" type={!shown ? "password" : "text"} sx={{margin: '8px',}} onChange={() => {setPassword(event.target.value)}}/>
-          {!shown ? <HiEyeSlash onClick={() => setShown(!shown)} /> : <HiEyeSlash onClick={() => setShown(!shown)}/>}
+          <TextField color='success' label="Email" sx={{margin: '8px',}} onChange={() => {setEmail(event.target.value)}}/>
+          <TextField color='success' label="Username" sx={{margin: '8px',}} onChange={() => {setUsername(event.target.value)}}/>
+          <TextField color='success' label="Password" type={!shown ? "password" : "text"} sx={{margin: '8px',}} onChange={() => {setPassword(event.target.value)}}/>
+          {!shown ? <HiEye onClick={() => setShown(!shown)} /> : <HiEyeSlash onClick={() => setShown(!shown)}/>}
           <TextField
             id="date"
             label="Birthday"
@@ -85,7 +85,7 @@ const RegisterPage = () => {
             <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="other" control={<Radio />} label="Other" />
           </RadioGroup>
-          <Button type="submit" variant="contained"color="success"sx={{width: '50%',padding: 1, margin: 'auto'}} onClick={handleRegister}>
+          <Button type="submit" variant="contained" color="success" sx={{width: '50%',padding: 1, margin: 'auto'}} onClick={handleRegister}>
             Submit
           </Button>
       </FormGroup>
