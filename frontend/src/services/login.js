@@ -1,4 +1,4 @@
-const baseUrl = '/api/login';
+const baseUrl = 'http://localhost:5000/api/login';
 
 const login = async (credential) => {
   const response = await fetch(baseUrl, {

@@ -4,7 +4,12 @@ import React from 'react';
 
 const Post = ({ user, post }) => {
   return (
-    <Box>
+    <Box
+      sx={{
+        width: 600,
+        backgroundColor: 'primary.dark'
+      }}
+    >
       <Typography>user.name</Typography>
       <Typography>post.content</Typography>
     </Box>

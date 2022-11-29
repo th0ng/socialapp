@@ -3,8 +3,8 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:5000/api/users';
 
 const getAll = async () => {
-  const request = await axios.get(baseUrl);
-  return request.then((response) => response.data);
+  const response = await axios.get(baseUrl).then((response) => response.data);
+  return response;
 };
 
 const register = async (credential) => {
@@ -13,4 +13,4 @@ const register = async (credential) => {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {getAll, register};
+export default { getAll, register };
