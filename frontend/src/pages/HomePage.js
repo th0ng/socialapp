@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import postService from '../services/posts';
 import loginService from '../services/login';
 
-import { HeaderNonUser, Header, Post } from '../components';
+import { Login, Header } from '../components';
+import { Container } from '@mui/system';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -24,11 +25,9 @@ const HomePage = () => {
       postService.setToken(user.token);
     }
   }, []);
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  const handleLogin = async () => {
     try {
-      const user = await loginService.login({ username, password });
+      const user = await loginService.login(JSON.stringify({ username, password }));
 
       window.localStorage.setItem("loggedNoteappUser", JSON.stringify(user));
 
@@ -54,10 +53,21 @@ const HomePage = () => {
       console.log(err);
     }
   };
+
+  const Interface = () => {
+    return (
+      <>
+        <Header handleLogout={handleLogout} />
+        <Container posts={posts} />
+      </>
+    )
+  };
+
   return (
     <div>
-      {!user ? <Header /> : <HeaderNonUser />}
-      {posts.map((post) => <Post />)}
+      {user === null
+        ? <Login handleLogin={handleLogin} setUsername={setUsername} setPassword={setPassword} />
+        : <Interface />}
     </div>
   )
 }

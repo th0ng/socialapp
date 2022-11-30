@@ -1,15 +1,13 @@
 const baseUrl = 'http://localhost:5000/api/login';
 
-const login = async (credential) => {
+const login = async (credentials) => {
   const response = await fetch(baseUrl, {
     method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json'
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: credential
+    body: credentials
   });
   return response.json();
 };

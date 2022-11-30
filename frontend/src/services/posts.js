@@ -10,32 +10,32 @@ const setToken = (newToken) => {
 const getAll = async () => {
     const request = axios.get(baseUrl);
     const response = await request;
-  return response.data;
+    return response.data;
 }
 
 const getPostById = async (id) => {
-  const elementUrl = `/api/posts/${id}`;
-  const request = axios.get(elementUrl);
-  const response = await request;
-  return response.data;
+    const elementUrl = `${baseUrl}/${id}`;
+    const request = axios.get(elementUrl);
+    const response = await request;
+    return response.data;
 }
 
 const create = async newObject => {
     const config = {
-        headers: {Authorization: token},
+        headers: { Authorization: token },
     }
     const request = axios.post(baseUrl, newObject, config);
     return request.then(response => response.data);
 }
 
 const remove = async id => {
-    const elementUrl = `/api/posts/${id}`;
+    const elementUrl = `${baseUrl}/${id}`;
     try {
-    return await axios.delete(elementUrl);
-  } catch (error) {
-    console.error('There was an error!', error);
-  }
+        return await axios.delete(elementUrl);
+    } catch (error) {
+        console.error('There was an error!', error);
+    }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {getAll, getPostById, create, remove, setToken}
+export default { getAll, getPostById, create, remove, setToken }

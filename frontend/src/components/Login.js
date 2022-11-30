@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import loginService from '../services/login';
-import { Box, FormGroup, TextField, RadioGroup, FormControlLabel, Radio, Typography, Button } from '@mui/material';
+import { Box, FormGroup, TextField, Typography, Button } from '@mui/material';
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 
-const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const Login = ({ handleLogin, setUsername, setPassword }) => {
   const [shown, setShown] = useState(false);
-
-  const handleLogin = () => {
-    const loginUser = JSON.stringify({ username, password });
-    loginService.login(loginUser)
-  }
 
   return (
     <Box sx={{
@@ -37,4 +29,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage;
+export default Login;

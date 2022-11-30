@@ -1,9 +1,11 @@
-import HeaderNonUser from "./HeaderNonUser";
+import Container from "./Container";
 import Post from "./Post";
 import Header from "./Header";
+import Login from "./Login";
 
 export {
-  HeaderNonUser, 
+  Container,
   Header,
   Post,
+  Login
 }

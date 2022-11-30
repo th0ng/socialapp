@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-const Post = ({ user, post }) => {
+const Post = ({ user, content }) => {
   return (
     <Box
       sx={{
