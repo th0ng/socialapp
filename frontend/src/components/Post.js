@@ -2,16 +2,15 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-const Post = ({ user, content }) => {
+const Post = ({ post }) => {
   return (
     <Box
       sx={{
-        width: 600,
-        backgroundColor: 'primary.dark'
+        backgroundColor: 'primary.dark',
       }}
     >
-      <Typography>user.name</Typography>
-      <Typography>post.content</Typography>
+      <Typography>{post.user.username}</Typography>
+      <Typography>{post.content}</Typography>
     </Box>
   )
 }

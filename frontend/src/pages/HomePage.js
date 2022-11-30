@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import postService from '../services/posts';
 import loginService from '../services/login';
+import { Login, Header, Container } from '../components';
 
-import { Login, Header } from '../components';
-import { Container } from '@mui/system';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -15,7 +14,7 @@ const HomePage = () => {
     postService
       .getAll().then((allPosts) => setPosts(allPosts));
   }
-  useEffect(hook, [])
+  useEffect(hook, []);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser");
@@ -40,7 +39,7 @@ const HomePage = () => {
     }
   };
 
-  const handleLogout = async (e) => {
+  const handleLogout = async () => {
     try {
       window.localStorage.removeItem("loggedNoteappUser");
 

@@ -1,11 +1,12 @@
 import React from 'react';
+import Box from "@mui/material/Box";
 import Post from './Post';
 
 const Container = ({ posts }) => {
   return (
-    <div>
-      {posts.map((e) => <Post user={e.user} content={e.post} />)}
-    </div>
+    <Box sx={{ marginTop: '40px' }}>
+      {posts.map((e) => <Post post={e} />)}
+    </Box>
 
   );
 }
