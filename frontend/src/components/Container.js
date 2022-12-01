@@ -4,8 +4,8 @@ import Post from './Post';
 
 const Container = ({ posts }) => {
   return (
-    <Box sx={{ marginTop: '40px' }}>
-      {posts.map((e) => <Post post={e} />)}
+    <Box>
+      {posts.map((e) => <Post key={e._id} post={e} />)}
     </Box>
 
   );
