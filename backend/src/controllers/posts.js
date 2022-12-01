@@ -4,6 +4,7 @@ const postsRouter = require('express').Router();
 
 const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
+const { validate } = require('../models/user');
 const User = require('../models/user');
 
 const getTokenFrom = (request) => {
@@ -15,7 +16,7 @@ const getTokenFrom = (request) => {
 };
 
 postsRouter.get('/', async (req, res) => {
-  const posts = await Post.find({}).populate('user', { username: 1 });
+  const posts = await Post.find({}).populate('user', { username: 1, name: 1 });
   res.json(posts);
 });
 
@@ -64,6 +65,27 @@ postsRouter.delete('/:id', (req, res, next) => {
       res.status(204).end();
     })
     .catch((err) => next(err));
+});
+
+// update post likes and comments
+
+postsRouter.patch('/:id', async (req, res, next) => {
+  const error = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const originalPost = await Post.findById(req.params.id);
+  if (!originalPost) return res.status(404).send('The post with given id was not found.');
+  let query = { $set: {} };
+  for (const key in req.body) {
+    if (originalPost[key] && originalPost[key] !== req.body[key]) {
+      query.$set[key] = req.body[key];
+    }
+  }
+  const updatedPost = await Post.updateOne({ _id: req.params.id }, query);
+
+  res.send(originalPost)
+    .then(() => {
+      res.status(204).end();
+    }).catch((err) => next(err));
 });
 
 module.exports = postsRouter;

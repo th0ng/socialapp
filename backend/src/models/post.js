@@ -8,7 +8,12 @@ const postSchema = new mongoose.Schema({
     maxlength: 400,
   },
   date: Date,
-  likes: Number,
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   comments: [
     {
       type: String,
