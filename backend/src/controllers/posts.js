@@ -4,6 +4,7 @@ const postsRouter = require('express').Router();
 
 const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const { validate } = require('../models/user');
 const User = require('../models/user');
 
@@ -69,24 +70,24 @@ postsRouter.delete('/:id', (req, res, next) => {
 
 // update post likes and comments
 // eslint-disable-next-line consistent-return
-postsRouter.patch('/:id', async (req, res, next) => {
+postsRouter.put('/:id', async (req, res, next) => {
   const error = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  const originalPost = await Post.findById(req.params.id);
-  if (!originalPost) return res.status(404).send('The post with given id was not found.');
-  const query = { $set: {} };
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in req.body) {
-    if (originalPost[key] && originalPost[key] !== req.body[key]) {
-      query.$set[key] = req.body[key];
-    }
-  }
-  const updatedPost = await Post.updateOne({ _id: req.params.id }, query);
 
-  res.send(originalPost)
-    .then(() => {
-      res.status(204).end();
-    }).catch((err) => next(err));
+  const body = req.body;
+  const token = getTokenFrom(req);
+  const decodedToken = jwt.verify(token, process.env.SECRET);
+
+  if (!decodedToken) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
+  const user = User.findById(decodedToken.id);
+  const post = Post.findByIdAndUpdate(
+    //implement the function here
+  )
+    .then(res.status(204))
+    .catch((err) => next(err));
 });
 
 module.exports = postsRouter;
