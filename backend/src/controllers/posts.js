@@ -68,13 +68,14 @@ postsRouter.delete('/:id', (req, res, next) => {
 });
 
 // update post likes and comments
-
+// eslint-disable-next-line consistent-return
 postsRouter.patch('/:id', async (req, res, next) => {
   const error = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   const originalPost = await Post.findById(req.params.id);
   if (!originalPost) return res.status(404).send('The post with given id was not found.');
-  let query = { $set: {} };
+  const query = { $set: {} };
+  // eslint-disable-next-line no-restricted-syntax
   for (const key in req.body) {
     if (originalPost[key] && originalPost[key] !== req.body[key]) {
       query.$set[key] = req.body[key];
