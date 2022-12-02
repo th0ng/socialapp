@@ -37,6 +37,9 @@ const Post = ({ post }) => {
         {post.content}
       </Typography>
 
+      {/* Likes number */}
+      <Typography textAlign='left'>{post.likes} likes</Typography>
+
       {/* Like anh comment buttons */}
       <Grid container spacing={0.5} sx={{ marginTop: '10px' }}>
         <Grid item xs={6}>

@@ -32,8 +32,8 @@ function Header({ handleLogout }) {
 
   return (
     <AppBar position="static">
-      <Container sx={{ backgroundColor: '#285430' }} maxWidth="xl">
-        <Toolbar sx={{ justifyContent: 'space-between', backgroundColor: '#285430' }} >
+      <Container sx={{ backgroundColor: '#453C67' }} maxWidth="xl">
+        <Toolbar sx={{ justifyContent: 'space-between', backgroundColor: '#453C67' }} >
 
           <Typography
             variant="h6"
