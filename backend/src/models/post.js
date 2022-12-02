@@ -11,8 +11,8 @@ const postSchema = new mongoose.Schema({
   likes: 0,
   comments: [
     {
-      type: String,
-      maxlength: 150,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment',
     },
   ],
   user: {
