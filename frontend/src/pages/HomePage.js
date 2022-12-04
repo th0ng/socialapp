@@ -57,6 +57,7 @@ const HomePage = () => {
     return (
       <>
         <Header handleLogout={handleLogout} />
+        <div>Hyvaa paiva.</div>
         <Container posts={posts} />
       </>
     )
